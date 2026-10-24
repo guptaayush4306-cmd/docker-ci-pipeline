@@ -1,0 +1,21 @@
+
+name: Docker CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Build Docker image
+        run: docker build -t my-python-app -f dockerfile .
+
+      - name: Test Docker container
+        run: docker run --rm my-python-app
